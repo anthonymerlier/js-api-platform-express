@@ -2,6 +2,10 @@ const express = require("express");
 const app = express();
 const port = 3000;
 
+// ON IMPORTE MONGODB
+require("./db/mongodb");
+
+// SETTINGS EXPRESS JS
 const allowCrossDomain = function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
@@ -9,15 +13,12 @@ const allowCrossDomain = function (req, res, next) {
   res.setHeader("Content-Type", "application/json");
   next();
 };
-
 app.use(allowCrossDomain);
 
-// ALL ENTITIES
-const entities = ["companies", "users"];
-
-//METHODS
+// REQUESTS & ALL ENTITIES
 const getStandardResponse = require("./utilities/getStandardResponse");
 const getResponseById = require("./utilities/getResponseById");
+const entities = ["companies", "users", "albums"];
 
 // ALL VALID REQUESTS
 for (let entity of entities) {
